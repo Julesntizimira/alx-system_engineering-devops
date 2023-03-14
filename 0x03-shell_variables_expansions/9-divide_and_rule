@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$((POWER/DIVINE)) \n"
+echo "$((POWER/DIVIDE)) \n"
