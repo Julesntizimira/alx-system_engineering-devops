@@ -2,7 +2,7 @@
 # This script is displaying "Best School" 10 times
 
 var=0
-while [ $var -le 10 ]
+while [ $var -lt 10 ]
 do
 	echo "Best School"
 	var=$((var + 1))
