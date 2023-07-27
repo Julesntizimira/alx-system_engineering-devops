@@ -4,8 +4,12 @@
 # Where only the part of the name after the first dash is displayed (refer to the example)
 
 
-for cmd in $(ls)
+for file in *
 do
-	base_name="${cmd%%.*}"
-	echo "$base_name"
+	if [ "$file" != "." ]
+	then
+		echo "$file" >> read_cut
+	fi
 done
+
+cut -d "-" -f 2 read_cut
