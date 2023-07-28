@@ -3,8 +3,8 @@
 #include "unistd.h"
 
 /**
- * infinite_while - a function that runs forever and returns nothing
- * Return: 0 in the end
+ * infinite_while - infinite loop
+ * Return: 0
 */
 int infinite_while(void)
 {
