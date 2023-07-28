@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
 # Write a Bash script that:
-
 # Creates the file /var/run/myscript.pid containing its PID
 # Displays To infinity and beyond indefinitely
 # Displays I hate the kill command when receiving a SIGTERM signal
@@ -10,9 +8,9 @@
 
 echo "$$" > /var/run/myscript.pid
 
-trap 'echo "I hate the kill command" && rm /var/run/myscript.pid && exit' SIGTERM
+trap 'echo "I hate the kill command" ; rm /var/run/myscript.pid ; exit' SIGTERM
 trap 'echo "Y U no love me?!"' SIGINT
-trap "rm /var/run/myscript.pid && exit" SIGQUIT
+trap "rm /var/run/myscript.pid ; exit" SIGQUIT
 
 
 while true
