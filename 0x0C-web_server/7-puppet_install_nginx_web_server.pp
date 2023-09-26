@@ -1,36 +1,26 @@
-# instal and configure nginx
-exec { 'apt-update':
-  command     => 'apt-get -y update',
-  path        => '/usr/bin:/bin',
-  refreshonly => true,
+# Install NginX
+# With puppet
+
+exec { 'apt-get-update':
+  command => '/usr/bin/apt-get update',
 }
+
 package { 'nginx':
-  ensure => 'installed',
-  require => Exec['apt-update'],
-} ->
+  ensure  => installed,
+  require => Exec['apt-get-update'],
+}
 
-file { '/var/www/html/index.nginx-debian.html':
+file { '/var/www/html/index.html':
   content => 'Hello World!',
+  require => Package['nginx'],
 }
 
-file { '/etc/nginx/sites-enabled/default':
-  ensure => file,
-}
-
-file_line { 'add redirect':
-  path  => '/etc/nginx/sites-enabled/default',
-  match => 'server_name _;',
-  line  => '     location /redirect_me {return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;}',
+exec {'redirect_me':
+  command  => 'sed -i "24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
+  provider => 'shell'
 }
 
 service { 'nginx':
-  ensure    => 'running',
-  enable    => true,
-  subscribe => File['/etc/nginx/sites-enabled/default'],
-  notify    => Exec['restart_nginx'],
-}
-
-exec { 'restart_nginx':
-  command     => '/usr/bin/sudo /usr/sbin/service nginx restart',
-  refreshonly => true,
+  ensure  => running,
+  require => Package['nginx'],
 }
