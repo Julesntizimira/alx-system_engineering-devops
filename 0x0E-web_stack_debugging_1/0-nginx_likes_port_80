@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-sudo apt-get update
-sudo apt-get upgrade nginx
-sudo sed -i 's/\(listen\s\)[^ ]*/\1 80/' /etc/nginx/sites-enabled/default
-sudo service nginx restart
+apt-get update
+apt-get upgrade nginx
+sed -i 's/\(listen\s\)[^ ]*/\1 80/' /etc/nginx/sites-enabled/default
+service nginx restart
