@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Configures firewall - port forwarding
+
+sudo apt -y update
+sudo apt install ufw
+sudo ufw disable
+sudo service ufw stop
+sudo ufw reset
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw enable
+sudo service ufw start
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
