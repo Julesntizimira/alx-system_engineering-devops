@@ -20,14 +20,14 @@ if __name__ == "__main__":
     for todo in todos:
         MyList = []
         myList = [
-                "'{}'".format(argv[1]),
-                "'{}'".format(res.get("username")),
-                "'{}'".format(todo.get("completed")),
-                "'{}'".format(todo.get("title"))
+                "{}".format(argv[1]),
+                "{}".format(res.get("username")),
+                "{}".format(todo.get("completed")),
+                "{}".format(todo.get("title"))
                 ]
         myListAll.append(myList)
 
     with open(f'{argv[1]}.csv', 'w', newline='') as csv_file:
-        csv_writer = csv.writer(csv_file)
+        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
         for item in myListAll:
             csv_writer.writerow(item)
