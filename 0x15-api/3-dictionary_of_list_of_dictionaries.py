@@ -22,9 +22,9 @@ if __name__ == "__main__":
         for todo in todos:
             Mydict = {}
             mydict = {
-                    "username": "{}".format(user.get("username")),
-                    "task": "{}".format(todo.get("title")),
-                    "completed": "{}".format(todo.get("completed"))
+                    "username": user.get("username"),
+                    "task": todo.get("title"),
+                    "completed": todo.get("completed")
                     }
             myListAll.append(mydict)
         to_json_dict["{}".format(user_id)] = myListAll
