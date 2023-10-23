@@ -7,28 +7,28 @@ if __name__ == "__main__":
     import csv
     import json
     import requests
+    import sys
 
-
-    us = 'https://jsonplaceholder.typicode.com/users/'
+    argv = sys.argv
+    user_id = argv[1]
+    us = f'https://jsonplaceholder.typicode.com/users/{user_id}'
     r = requests.get(us)
     res = r.json()
 
     to_json_dict = {}
-    for user in res:
-        user_id = user.get('id')
-        td = f'https://jsonplaceholder.typicode.com/todos?userId={user_id}'
-        res_todos = requests.get(td)
-        todos = res_todos.json()
-        myListAll = []
-        for todo in todos:
-            Mydict = {}
-            mydict = {
-                    "username": "{}".format(user.get("username")),
-                    "task": "{}".format(todo.get("title")),
-                    "completed": "{}".format(todo.get("completed"))
-                    }
+    td = f'https://jsonplaceholder.typicode.com/todos?userId={user_id}'
+    res_todos = requests.get(td)
+    todos = res_todos.json()
+    myListAll = []
+    for todo in todos:
+        Mydict = {}
+        mydict = {
+                "task": todo.get("title"),
+                "completed": todo.get("completed"),
+                "username": res.get("username")
+                }
         myListAll.append(mydict)
-        to_json_dict["{}".format(user_id)] =  myListAll
+    to_json_dict["{}".format(user_id)] = myListAll
 
-    with open('todo_all_employees.json', 'w') as jsonfile:
+    with open(f'{user_id}.json', 'w') as jsonfile:
         json.dump(to_json_dict, jsonfile)
