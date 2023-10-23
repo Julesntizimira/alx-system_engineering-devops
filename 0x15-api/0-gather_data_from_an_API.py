@@ -5,9 +5,10 @@
 '''
 import json
 import requests
-from sys import argv
+import sys
 
 
+argv = sys.argv
 r = requests.get('https://jsonplaceholder.typicode.com/users/{}'
                  .format(argv[1]))
 res = r.json()
