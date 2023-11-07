@@ -12,7 +12,7 @@ def top_ten(subreddit):
     user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
     url = 'https://www.reddit.com/r/{}.json'.format(subreddit)
     response = get(url, headers=user_agent)
-    if response.status_code != '200':
+    if response.status_code == '404':
         print(None)
         return
     results = response.json()
