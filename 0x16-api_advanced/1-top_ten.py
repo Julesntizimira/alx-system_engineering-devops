@@ -7,7 +7,7 @@ def top_ten(subreddit):
     """ prints the titles of the first 10 hot posts
         listed for a given subreddit."""
     if subreddit is None or not isinstance(subreddit, str):
-        return 0
+        print(None)
     user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
     url = 'https://www.reddit.com/r/{}.json'.format(subreddit)
     response = get(url, headers=user_agent)
@@ -21,4 +21,4 @@ def top_ten(subreddit):
             print(ps.get('data').get('title'))
             i += 1
     except Exception:
-        return 0
+        return print(None)
